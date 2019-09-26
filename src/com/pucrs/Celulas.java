@@ -1,11 +1,10 @@
 package com.pucrs;
 
-import java.io.*;
-
 public class Celulas {
     private int quantidade;
     private int distancias[][];
     private int coordenadas[][];
+    private int matrizDeIDs[][];
 
     public int getQuantidade(){
         return quantidade;
@@ -19,73 +18,73 @@ public class Celulas {
         return coordenadas;
     }
 
-    public void readArquivo(String arq){
-        File arquivo = new File(arq);
-        FileReader arqLeitura;
-        BufferedReader leitor;
-        String linha;
-        String[] val;
-        try {
-            arqLeitura = new FileReader(arquivo);
-            leitor = new BufferedReader(arqLeitura);
-
-            try {
-                linha = leitor.readLine();
-                quantidade = Integer.parseInt(linha);
-                distancias = new int[quantidade][quantidade];
-                coordenadas = new int[quantidade][2];
-
-                linha = leitor.readLine();
-
-                for(int i=0;i<quantidade;i++){
-                    linha = leitor.readLine();
-                    val = linha.split(" ");
-                    for(int j=0;j<2;j++){
-                        coordenadas[i][j] = Integer.parseInt(val[j]);
-                    }
-                }
-
-                linha = leitor.readLine();
-
-                for(int i=0;i<quantidade;i++){
-                    linha = leitor.readLine();
-                    val = linha.split(" ");
-                    for(int j=0;j<quantidade;j++){
-                        distancias[i][j] = Integer.parseInt(val[j]);
-                    }
-                }
-
-
-            } catch (IOException e) {
-                System.out.println("ERRO ao ler o aquivo");
-                System.exit(0);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("ERRO ao ler o aquivo");
-            System.exit(0);
-        }
+    public int[][] getMatrizDeIDs() {
+        return matrizDeIDs;
     }
 
     public void converteMatrizParaGrafo(String[][] matriz){
-        quantidade = matriz.length * matriz[0].length;
-        distancias = new int[quantidade][8];
+        matrizDeIDs = new int[matriz.length][matriz[0].length];
+        quantidade = contaCelulas(matriz);
         coordenadas = new int[quantidade][2];
-
+        coletaCoordenadas(matriz);
+        distancias = new int[quantidade][8];
         for(int i=0;i<quantidade;i++){
-            for(int j=0;j<2;j++){
-                coordenadas[i][j] = Integer.parseInt(matriz[i][j]);
+            calculaDistanciaDosVizinhos(i, matriz);
+        }
+    }
+
+    private int contaCelulas(String[][] matriz){
+        int total = 0;
+        for (int i = 0; i < matriz.length; i++){
+            for (int j = 0; j < matriz[0].length; j++){
+                if(!matriz[i][j].contains("1")){
+                    total++;
+                }
             }
         }
-        for(int i=0;i<quantidade;i++){
-            for(int j=0;j<quantidade;j++){
-                if((Integer.parseInt(matriz[i][j]) == 0) || (matriz[i][j]).contains("E") ||
-                        (matriz[i-1][j-1]).contains("S")){
-                    distancias[i][j] = 1;
+        return total;
+    }
+
+    private void coletaCoordenadas(String[][] matriz){
+        int celula = 0;
+        for (int i = 0; i < matriz.length; i++){
+            for (int j = 0; j < matriz[0].length; j++){
+                if(!matriz[i][j].contains("1")){
+                    coordenadas[celula][0] = i;
+                    coordenadas[celula][1] = j;
+                    matrizDeIDs[i][j] = celula;
+                    celula++;
                 }
-                if((Integer.parseInt(matriz[i][j]) == 1)){
-                    distancias[i][j] = 0;
+                else{
+                    matrizDeIDs[i][j] = -1;
                 }
             }
         }
     }
+
+    private void calculaDistanciaDosVizinhos(int celula, String[][] matriz){
+        int celulaVizinha = 0;
+        for(int x = -1; x < 2; x++){
+            for(int y = -1; y < 2; y++){
+                if(!(x == 0 && y == 0)){
+                    int vizinhoX = coordenadas[celula][0] + x;
+                    int vizinhoY = coordenadas[celula][1] + y;
+
+                    if((vizinhoX > -1) && (vizinhoX < matriz.length) && (vizinhoY > -1) && (vizinhoY < matriz[0].length)){
+                        if(!matriz[vizinhoX][vizinhoY].contains("1")){
+                            distancias[celula][celulaVizinha] = 1;
+                        }
+                        else{
+                            distancias[celula][celulaVizinha] = 0;
+                        }
+                    }
+                    else{
+                        distancias[celula][celulaVizinha] = 0;
+                    }
+                    celulaVizinha++;
+                }
+            }
+        }
+    }
+
 }

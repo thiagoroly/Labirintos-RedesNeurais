@@ -42,10 +42,12 @@ public class AlgoritmoGenetico {
                  System.out.println(">>>> Convergiu: ");
                  break;
             }*/
+
             printaMatriz(populacao);
             //printaMatriz(populacaoIntermediaria);
             crossOver(populacaoIntermediaria, populacao);
-            if(geracao%2==0) mutacao(populacaoIntermediaria);
+            if(geracao%2==0)
+                mutacao(populacaoIntermediaria);
             // printaMatriz(populacaoIntermediaria);
             populacao = populacaoIntermediaria;
         }
@@ -200,7 +202,8 @@ public class AlgoritmoGenetico {
         for(int cont = 1; cont<=2; cont++){
             int linha = r.nextInt(TAM);
             int coluna = r.nextInt(SIZE);
-            if(intermediaria[linha][coluna]==0) intermediaria[linha][coluna] = 1;
+            if(intermediaria[linha][coluna]==0)
+                intermediaria[linha][coluna] = 1;
             else intermediaria[linha][coluna] = 0;
 
             System.out.println("Mutou o cromossomo : " + linha);
@@ -213,9 +216,12 @@ public class AlgoritmoGenetico {
      */
     private static boolean convergencia(int[][] populacao, int melhor){
         int cont = 0;
-        for(int i=0; i<TAM; i++) if(populacao[i][SIZE] == populacao[melhor][SIZE]) cont++;
+        for(int i=0; i<TAM; i++)
+            if(populacao[i][SIZE] == populacao[melhor][SIZE])
+                cont++;
         double perc = cont*100.0/TAM;
-        if(perc>98) return true;
+        if(perc>98)
+            return true;
         return false;
     }
 }
