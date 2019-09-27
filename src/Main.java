@@ -1,6 +1,4 @@
-import com.pucrs.AlgoritmoAStar;
-import com.pucrs.AlgoritmoGenetico;
-import com.pucrs.Arquivo;
+import com.pucrs.*;
 
 public class Main {
 
@@ -16,9 +14,7 @@ public class Main {
         devem ser entregues juntamente com o código e o executável.
         */
 
-
-
-        //String[][] matriz = Arquivo.learquivo("./src/labirinto1_10.txt");
+        Labirinto labirinto = new Labirinto(Arquivo.learquivo("./src/labirinto1_10.txt"));
 
         //for(int i = 0; i< matriz.length; i++) {
         //    String linha = "";
@@ -30,6 +26,7 @@ public class Main {
 
         //int idEntrada = 0;
         //int idSaida = 55;
+
         //AlgoritmoAStar aEstrela = new AlgoritmoAStar();
         //aEstrela.carregaDados(matriz, idEntrada, idSaida);
         //System.out.println(aEstrela.encontraCaminho());
@@ -44,7 +41,7 @@ public class Main {
         //}
 
 
-        AlgoritmoGenetico aG = new AlgoritmoGenetico();
-        aG.rodaAlgoritmoGenetico();
+        AlgoritmoGeneticoCustom aG = new AlgoritmoGeneticoCustom(labirinto.getMatriz(), 30, 11, 50, labirinto.getEntrada());
+        //aG.rodaAlgoritmoGenetico();
     }
 }
