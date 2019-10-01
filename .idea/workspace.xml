@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03467a21-5032-4743-ba9a-7babf0599cd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/META-INF/T1 IA.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoAStar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoAStar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoGenetico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoGenetico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Arquivo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Arquivo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Celulas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Celulas.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Labirinto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Labirinto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Nodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Nodo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoCustom.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

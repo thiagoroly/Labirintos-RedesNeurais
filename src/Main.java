@@ -42,6 +42,7 @@ public class Main {
 
 
         AlgoritmoGeneticoCustom aG = new AlgoritmoGeneticoCustom(labirinto.getMatriz(), 30, 11, 50, labirinto.getEntrada());
-        //aG.rodaAlgoritmoGenetico();
+        Coordenada saida = aG.encontraSaida();
+        System.out.println("Saída achada na coordenada: " + saida.getX() + ";" +saida.getY());
     }
 }

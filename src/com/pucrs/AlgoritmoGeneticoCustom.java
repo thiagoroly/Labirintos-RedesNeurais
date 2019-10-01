@@ -19,7 +19,11 @@ public class AlgoritmoGeneticoCustom {
     private int[][] populacao;                       //populaçao atual: contem os cromossomos (soluçoes candidatas)
     private int[][] populacaoIntermediaria;          //populaçao intermediaria: corresponde a populaçao em construçao
     private Coordenada entrada;
-    private ArrayList<Coordenada> visitados = new ArrayList<Coordenada>(); //para validação de se o agente já visitou um espaço anteriormente
+    private ArrayList<Coordenada> visitados = new ArrayList<>(); //para validação de se o agente já visitou um espaço anteriormente
+    private int totalPontos;
+    private int scoreSaida;
+    private boolean achouSaida;
+
 
     public AlgoritmoGeneticoCustom(String[][] labirintoMatriz, int numGenes, int numCromossomos, int maxGeracoes, Coordenada entrada) {
         this.numGenes = numGenes;
@@ -29,19 +33,33 @@ public class AlgoritmoGeneticoCustom {
         this.entrada = entrada;
         populacao = new int [numCromossomos][numGenes+1];
         populacaoIntermediaria = new int [numCromossomos][numGenes+1];
+        scoreSaida = populacao.length * populacao[0].length;
+        achouSaida = false;
         inicializaPopulacao(populacao);   //cria soluçoes aleatoriamente
 
-        executaAlgoritmoGenetico();
+        //encontraSaida();
     }
 
     public Coordenada encontraSaida(){
         Coordenada saida = new Coordenada(0,0);
         for(int geracao = 0; geracao<maxGeracoes; geracao++) {
             System.out.println("Geraçao:" + geracao);
+            System.out.println("Score da saída:" + scoreSaida);
 
             calculaFuncoesDeAptidao(populacao);
+            //int melhor = selecionaElitismo(populacao, populacaoIntermediaria);
+            if(totalPontos >= scoreSaida && achouSaida) {
+                System.out.println(">>>> Achou a saída: ");
+                saida.setX(visitados.get(visitados.size()-1).getX());
+                saida.setY(visitados.get(visitados.size()-1).getY());
+                mostraGeracao(populacao);
+                break;
+            }
 
-
+            crossOver(populacaoIntermediaria, populacao);
+            if(geracao%2==0)
+                mutacao(populacaoIntermediaria);
+            populacao = populacaoIntermediaria;
         }
         return saida;
     }
@@ -71,12 +89,13 @@ public class AlgoritmoGeneticoCustom {
      * Funçao de aptidao: heuristica que estima a qualidade de uma soluçao
      */
     private void funcaoDeAptidao(int[] linha) {
-        int totalPontos =0;
+        totalPontos = 55;
         Coordenada agente = entrada;
         visitados = new ArrayList<Coordenada>();
+        achouSaida = false;
 
         int i = 0;
-        for(; i<linha.length-1; i++) {
+        for(; i<linha.length-1 && !achouSaida; i++) {
             switch (i){
                 case 0:
 
@@ -87,6 +106,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -103,6 +127,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -119,6 +148,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -135,6 +169,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -151,6 +190,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -167,6 +211,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -183,6 +232,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -199,6 +253,11 @@ public class AlgoritmoGeneticoCustom {
                             totalPontos -= 5;
                         }
                         else {
+                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                                totalPontos += scoreSaida;
+                                visitados.add(agente);
+                                achouSaida = true;
+                            }
                             totalPontos += 10;
                             visitados.add(agente);
                         }
@@ -252,18 +311,6 @@ public class AlgoritmoGeneticoCustom {
         return elite;
     }
 
-    private void solucaoOtima(int[][] populacaoIntermediaria){
-        System.out.println("Cromossomo: ");
-        int soma = 0;
-        for(int j=0; j<numGenes; j++){
-            if(populacaoIntermediaria[0][j]==0) {
-                //System.out.print(cargas[j]+ " ");
-                //soma = soma + cargas[j];
-            }
-        }
-        System.out.println(" - Total: " + soma);
-    }
-
     private void crossOver(int[][] intermediaria, int[][] populacao) {
         int[] pai;
         int[] pai2;
@@ -315,25 +362,15 @@ public class AlgoritmoGeneticoCustom {
 
     }
 
-    private void executaAlgoritmoGenetico(){
-        for(int geracao = 0; geracao<maxGeracoes; geracao++) {
-            System.out.println("Geraçao:" + geracao);
-            calculaFuncoesDeAptidao(populacao);
-            int melhor = selecionaElitismo(populacao, populacaoIntermediaria); //highlander, Vulgo elitismo
-            if(populacaoIntermediaria[0][numGenes] ==0) {
-                //printaMatriz(populacao);
-                System.out.println(">>>> Achou a melhor distribuiçao: ");
-                solucaoOtima(populacaoIntermediaria);
-                break;
+    private void mostraGeracao(int[][] populacao) {
+        System.out.println("__________________________________________________________________");
+        for(int i = 0; i < populacao.length; i++) {
+            System.out.print("(" + i + ") ");
+            for(int j = 0; j < populacao[i].length-1; j++) {
+                System.out.print(populacao[i][j] + " ");
             }
-
-            //printaMatriz(populacao);
-            //printaMatriz(populacaoIntermediaria);
-            crossOver(populacaoIntermediaria, populacao);
-            if(geracao%2==0)
-                mutacao(populacaoIntermediaria);
-            // printaMatriz(populacaoIntermediaria);
-            populacao = populacaoIntermediaria;
+            System.out.println(" Aptidao: " + totalPontos);
         }
+        System.out.println("__________________________________________________________________");
     }
 }
