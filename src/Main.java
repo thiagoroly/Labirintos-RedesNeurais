@@ -1,5 +1,7 @@
 import com.pucrs.*;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public final static int NUMGENES = 21; //total de cargas
@@ -14,35 +16,30 @@ public class Main {
         devem ser entregues juntamente com o código e o executável.
         */
 
-        Labirinto labirinto = new Labirinto(Arquivo.learquivo("./src/labirinto1_10.txt"));
+        Labirinto labirinto = new Labirinto(Arquivo.learquivo(args[0]));
 
-        //for(int i = 0; i< matriz.length; i++) {
-        //    String linha = "";
-        //    for (int j = 0; j < matriz[i].length; j++) {
-        //        linha += " " + matriz[i][j];
-        //    }
-        //    System.out.println(linha);
-        //}
+        AlgoritmoGeneticoCustom aG = new AlgoritmoGeneticoCustom(labirinto.getMatriz(), Integer.valueOf(args[1]), Integer.valueOf(args[2]), Integer.valueOf(args[3]), labirinto.getEntrada());
+        ArrayList<Coordenada> saida = aG.encontraSaida();
+        System.out.println("Saída achada na coordenada: (" + saida.get(saida.size()-1).getX() + "," +saida.get(saida.size()-1).getY() + ")");
 
-        //int idEntrada = 0;
-        //int idSaida = 55;
+        String texto = "";
+        for(Coordenada coor :  saida){
+            texto += "(" + coor.getX() + "," + coor.getY() + ") ";
+        }
+        System.out.println(texto);
 
-        //AlgoritmoAStar aEstrela = new AlgoritmoAStar();
-        //aEstrela.carregaDados(matriz, idEntrada, idSaida);
-        //System.out.println(aEstrela.encontraCaminho());
+        AlgoritmoAStar aEstrela = new AlgoritmoAStar();
+        aEstrela.carregaDados(labirinto.getMatriz(), labirinto.getEntrada(), saida.get(saida.size()-1));
 
-        //aEstrela.desenhaCaminho();
-        //for(int i = 0; i< matriz.length; i++) {
-        //    String linha = "";
-        //    for (int j = 0; j < matriz[i].length; j++) {
-        //        linha += " " + matriz[i][j];
-        //    }
-        //    System.out.println(linha);
-        //}
+        System.out.println(aEstrela.encontraCaminho());
 
-
-        AlgoritmoGeneticoCustom aG = new AlgoritmoGeneticoCustom(labirinto.getMatriz(), 30, 11, 50, labirinto.getEntrada());
-        Coordenada saida = aG.encontraSaida();
-        System.out.println("Saída achada na coordenada: " + saida.getX() + ";" +saida.getY());
+        aEstrela.desenhaCaminho();
+        for(int i = 0; i< labirinto.getMatriz().length; i++) {
+            String linha = "";
+            for (int j = 0; j < labirinto.getMatriz()[i].length; j++) {
+                linha += " " + labirinto.getMatriz()[i][j];
+            }
+            System.out.println(linha);
+        }
     }
 }

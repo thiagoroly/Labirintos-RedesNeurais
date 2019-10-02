@@ -20,10 +20,8 @@ public class AlgoritmoGeneticoCustom {
     private int[][] populacaoIntermediaria;          //populaçao intermediaria: corresponde a populaçao em construçao
     private Coordenada entrada;
     private ArrayList<Coordenada> visitados = new ArrayList<>(); //para validação de se o agente já visitou um espaço anteriormente
-    private int totalPontos;
-    private int scoreSaida;
-    private boolean achouSaida;
-
+    //private int scoreSaida;
+    //private boolean achouSaida;
 
     public AlgoritmoGeneticoCustom(String[][] labirintoMatriz, int numGenes, int numCromossomos, int maxGeracoes, Coordenada entrada) {
         this.numGenes = numGenes;
@@ -33,34 +31,34 @@ public class AlgoritmoGeneticoCustom {
         this.entrada = entrada;
         populacao = new int [numCromossomos][numGenes+1];
         populacaoIntermediaria = new int [numCromossomos][numGenes+1];
-        scoreSaida = populacao.length * populacao[0].length;
-        achouSaida = false;
         inicializaPopulacao(populacao);   //cria soluçoes aleatoriamente
-
-        //encontraSaida();
     }
 
-    public Coordenada encontraSaida(){
-        Coordenada saida = new Coordenada(0,0);
-        for(int geracao = 0; geracao<maxGeracoes; geracao++) {
+    public ArrayList<Coordenada> encontraSaida(){
+        for(int geracao = 1; geracao <= maxGeracoes; geracao++) {
             System.out.println("Geraçao:" + geracao);
-            System.out.println("Score da saída:" + scoreSaida);
 
             calculaFuncoesDeAptidao(populacao);
-            //int melhor = selecionaElitismo(populacao, populacaoIntermediaria);
-            if(totalPontos >= scoreSaida && achouSaida) {
-                System.out.println(">>>> Achou a saída: ");
-                saida.setX(visitados.get(visitados.size()-1).getX());
-                saida.setY(visitados.get(visitados.size()-1).getY());
+            int melhor = selecionaElitismo(populacao, populacaoIntermediaria); //highlander, Vulgo elitismo
+
+            if(populacaoIntermediaria[0][numGenes] > 200) {
                 mostraGeracao(populacao);
-                break;
+                System.out.println(">>>> Achou a saída: ");
+
+                //saida.setX(visitados.get(visitados.size()-1).getX());
+                //saida.setY(visitados.get(visitados.size()-1).getY());
+                //
+                return solucaoOtima();
             }
 
             crossOver(populacaoIntermediaria, populacao);
-            if(geracao%2==0)
+            if(geracao%2==0) {
                 mutacao(populacaoIntermediaria);
+            }
             populacao = populacaoIntermediaria;
         }
+        ArrayList<Coordenada> saida = new ArrayList();
+        saida.add(new Coordenada(0,0));
         return saida;
     }
 
@@ -71,7 +69,7 @@ public class AlgoritmoGeneticoCustom {
         Random r = new Random();
         for(int i = 0; i < populacao.length; i++) {
             for(int j = 0; j < populacao[i].length -1; j++) {
-                populacao[i][j] = r.nextInt(8)+1;
+                populacao[i][j] = r.nextInt(8);
             }
         }
     }
@@ -89,190 +87,79 @@ public class AlgoritmoGeneticoCustom {
      * Funçao de aptidao: heuristica que estima a qualidade de uma soluçao
      */
     private void funcaoDeAptidao(int[] linha) {
-        totalPontos = 55;
-        Coordenada agente = entrada;
-        visitados = new ArrayList<Coordenada>();
-        achouSaida = false;
+        int totalPontos = 0;
+        //System.out.println("Entrada: " + entrada.getX() + "," + entrada.getY());
+        Coordenada agente = new Coordenada(entrada.getX(), entrada.getY());
+        visitados = new ArrayList<>();
+        visitados.add(new Coordenada(entrada.getX(), entrada.getY()));
 
         int i = 0;
-        for(; i<linha.length-1 && !achouSaida; i++) {
-            switch (i){
+        for(; i<linha.length-1; i++) {
+            switch (linha[i]){
                 case 0:
-
-                    if (dentroDoLimite(agente.getX()-1,agente.getY()-1) && !labirintoMatriz[agente.getX()-1][agente.getY()-1].contains("1")){
-                        agente.setX(agente.getX()-1);
-                        agente.setY(agente.getY()-1);
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, -1, -1);
                     break;
                 case 1:
-                    if (dentroDoLimite(agente.getX()-1,agente.getY()) && !labirintoMatriz[agente.getX()-1][agente.getY()].contains("1")){
-                        agente.setX(agente.getX()-1);
-                        agente.setY(agente.getY());
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, -1, 0);
                     break;
                 case 2:
-                    if (dentroDoLimite(agente.getX()-1,agente.getY()+1) && !labirintoMatriz[agente.getX()-1][agente.getY()+1].contains("1")){
-                        agente.setX(agente.getX()-1);
-                        agente.setY(agente.getY()+1);
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, -1, 1);
                     break;
                 case 3:
-                    if (dentroDoLimite(agente.getX(),agente.getY()-1) && !labirintoMatriz[agente.getX()][agente.getY()-1].contains("1")){
-                        agente.setX(agente.getX());
-                        agente.setY(agente.getY()-1);
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, 0, -1);
                     break;
                 case 4:
-                    if (dentroDoLimite(agente.getX(),agente.getY()+1) && !labirintoMatriz[agente.getX()][agente.getY()+1].contains("1")){
-                        agente.setX(agente.getX());
-                        agente.setY(agente.getY()+1);
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, 0, 1);
                     break;
                 case 5:
-                    if (dentroDoLimite(agente.getX()+1,agente.getY()-1) && !labirintoMatriz[agente.getX()+1][agente.getY()-1].contains("1")){
-                        agente.setX(agente.getX()+1);
-                        agente.setY(agente.getY()-1);
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, 1, -1);
                     break;
                 case 6:
-                    if (dentroDoLimite(agente.getX()+1,agente.getY()) && !labirintoMatriz[agente.getX()+1][agente.getY()].contains("1")){
-                        agente.setX(agente.getX()+1);
-                        agente.setY(agente.getY());
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, 1, 0);
                     break;
                 case 7:
-                    if (dentroDoLimite(agente.getX()+1,agente.getY()+1) && !labirintoMatriz[agente.getX()+1][agente.getY()+1].contains("1")){
-                        agente.setX(agente.getX()+1);
-                        agente.setY(agente.getY()+1);
-                        if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                            totalPontos -= 5;
-                        }
-                        else {
-                            if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                                totalPontos += scoreSaida;
-                                visitados.add(agente);
-                                achouSaida = true;
-                            }
-                            totalPontos += 10;
-                            visitados.add(agente);
-                        }
-                    }
-                    else{
-                        totalPontos-= 5;
-                    }
+                    totalPontos += computaPontuacao(agente, 1, 1);
                     break;
             }
         }
+        System.out.println("total pontos: " + totalPontos);
         linha[i] = totalPontos;
     }
 
+    private int computaPontuacao(Coordenada agente, int X, int Y){
+
+        if (dentroDoLimite(agente.getX() + X,agente.getY() + Y)){
+
+            //int test1 = agente.getX() + X;
+            //int test2 = agente.getY() + Y;
+
+            //System.out.println("x: " + test1 + ", y: " + test2);
+
+            if(!labirintoMatriz[agente.getX() + X][agente.getY() + Y].contains("1")){
+                agente.setX(agente.getX()+ X);
+                agente.setY(agente.getY()+ Y);
+
+                //System.out.println(agente.getX() + "," + agente.getY());
+                //System.out.println();
+
+                if(jaVisitouCoordenada(agente.getX(), agente.getY())){
+                    return -11;
+                }
+                else {
+                    if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                        visitados.add(new Coordenada(agente.getX(), agente.getY()));
+                        return 300;
+                    }
+                    visitados.add(new Coordenada(agente.getX(), agente.getY()));
+                    return 10;
+                }
+            }
+        }
+        return -0;
+    }
+
     private boolean dentroDoLimite(int x, int y){
-        if((x > -1) && (x < labirintoMatriz.length) && (y > -1) && (x < labirintoMatriz[0].length)){
+        if(((x > -1) && (x < labirintoMatriz.length)) && ((y > -1) && (y < labirintoMatriz[0].length))){
             return true;
         }
         return false;
@@ -297,15 +184,15 @@ public class AlgoritmoGeneticoCustom {
         int elite = 0;
         int menorCoord = populacao[0][numGenes];
 
-        for(int i=1; i<populacao.length; i++) {
-            if(populacao[i][numGenes] < menorCoord) {
+        for(int i=1; i < populacao.length; i++) {
+            if(populacao[i][numGenes] > menorCoord) {
                 menorCoord = populacao[i][numGenes];
                 elite = i;
             }
         }
         System.out.println("Elitismo - selecao; melhor do cromossomo: " + elite);
 
-        for(int i=0; i<numGenes+1; i++) {
+        for(int i=0; i < numGenes+1; i++) {
             populacaoIntermediaria[0][i] = populacao[elite][i];
         }
         return elite;
@@ -321,7 +208,7 @@ public class AlgoritmoGeneticoCustom {
                 pai = torneio(populacao);
                 pai2 = torneio(populacao);
             }while(pai==pai2);
-            System.out.println("Gerando dois filhos...");
+            //System.out.println("Gerando dois filhos...");
             for(int j=0;j<corte; j++){
                 intermediaria[i][j]=pai[j];
                 intermediaria[i+1][j]=pai2[j];
@@ -338,11 +225,11 @@ public class AlgoritmoGeneticoCustom {
         int l1 = r.nextInt(populacao.length);
         int l2 = r.nextInt(populacao.length);
 
-        if(populacao[l1][numGenes] < populacao[l2][numGenes]) {
-            System.out.println("Cromossomo de crossover: " + l1);
+        if(populacao[l1][numGenes] > populacao[l2][numGenes]) {
+            //System.out.println("Cromossomo de crossover: " + l1);
             return populacao[l1];
         }else {
-            System.out.println("Cromossomo de crossover: " + l2);
+            //System.out.println("Cromossomo de crossover: " + l2);
             return populacao[l2];
         }
     }
@@ -357,7 +244,7 @@ public class AlgoritmoGeneticoCustom {
                 intermediaria[linha][coluna] = 1;
             else intermediaria[linha][coluna] = 0;
 
-            System.out.println("Cromossomo: " + linha + " sofreu mutacao");
+            //System.out.println("Cromossomo: " + linha + " sofreu mutacao");
         }
 
     }
@@ -369,8 +256,78 @@ public class AlgoritmoGeneticoCustom {
             for(int j = 0; j < populacao[i].length-1; j++) {
                 System.out.print(populacao[i][j] + " ");
             }
-            System.out.println(" Aptidao: " + totalPontos);
+            System.out.println(" Aptidao: " + populacao[i][numGenes]);
         }
         System.out.println("__________________________________________________________________");
+    }
+
+    /**
+     * Decodifica melhor soluçao
+     */
+    private ArrayList<Coordenada> solucaoOtima(){
+        ArrayList<Coordenada> caminho = new ArrayList<>();
+        Coordenada agente = new Coordenada(entrada.getX(), entrada.getY());
+        for(int i = 0; i<populacaoIntermediaria[0].length-1; i++) {
+            switch (populacaoIntermediaria[0][i]){
+                case 0:
+                    if(localizaSaida(agente, -1, -1, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 1:
+                    if(localizaSaida(agente, -1, 0, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 2:
+                    if(localizaSaida(agente, -1, 1, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 3:
+                    if(localizaSaida(agente, 0, -1, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 4:
+                    if(localizaSaida(agente, 0, 1, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 5:
+                    if(localizaSaida(agente, 1, -1, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 6:
+                    if(localizaSaida(agente, 1, 0, caminho)){
+                    return caminho;
+                }
+                    break;
+                case 7:
+                    if(localizaSaida(agente, 1, 1, caminho)){
+                        return caminho;
+                    }
+                    break;
+            }
+        }
+        return caminho;
+    }
+
+    private boolean localizaSaida(Coordenada agente, int X, int Y, ArrayList<Coordenada> caminho){
+        if (dentroDoLimite(agente.getX()+ X,agente.getY() + Y)){
+            if(!labirintoMatriz[agente.getX() + X][agente.getY() + Y].contains("1")){
+                agente.setX(agente.getX()+ X);
+                agente.setY(agente.getY()+ Y);
+
+                if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
+                    visitados.add(agente);
+                    caminho.add(new Coordenada(agente.getX(), agente.getY()));
+                    return true;
+                }
+                caminho.add(new Coordenada(agente.getX(), agente.getY()));
+            }
+        }
+        return false;
     }
 }

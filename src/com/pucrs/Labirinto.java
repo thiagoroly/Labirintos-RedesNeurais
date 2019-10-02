@@ -1,5 +1,7 @@
 package com.pucrs;
 
+import java.util.ArrayList;
+
 public class Labirinto {
 
     private String[][] matriz;
@@ -21,5 +23,26 @@ public class Labirinto {
 
     public String[][] getMatriz() {
         return matriz;
+    }
+
+    public String desenhaMatriz(ArrayList<Coordenada> caminho){
+        boolean aux;
+        String saida = "";
+        for(int i = 0; i < this.matriz.length; i++){
+            for(int j = 0; j < this.matriz[0].length; j++){
+                aux = false;
+                for(Coordenada coor : caminho){
+                    if((coor.getX() == i) && (coor.getY() == j)){
+                        saida += "$ ";
+                        aux = true;
+                    }
+                }
+                if(!aux){
+                    saida += this.matriz[i][j] + " ";
+                }
+            }
+            saida += "\n";
+        }
+        return saida;
     }
 }

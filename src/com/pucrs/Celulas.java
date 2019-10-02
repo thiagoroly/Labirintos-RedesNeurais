@@ -5,6 +5,12 @@ public class Celulas {
     private int distancias[][];
     private int coordenadas[][];
     private int matrizDeIDs[][];
+    private int entradaX;
+    private int entradaY;
+    private int saidaX;
+    private int saidaY;
+    private int idNoInicial;
+    private int idNoFinal;
 
     public int getQuantidade(){
         return quantidade;
@@ -22,7 +28,11 @@ public class Celulas {
         return matrizDeIDs;
     }
 
-    public void converteMatrizParaGrafo(String[][] matriz){
+    public void converteMatrizParaGrafo(String[][] matriz, Coordenada entrada, Coordenada saida){
+        entradaX = entrada.getX();
+        entradaY = entrada.getY();
+        saidaX = saida.getX();
+        saidaY = saida.getY();
         matrizDeIDs = new int[matriz.length][matriz[0].length];
         quantidade = contaCelulas(matriz);
         coordenadas = new int[quantidade][2];
@@ -50,6 +60,12 @@ public class Celulas {
         for (int i = 0; i < matriz.length; i++){
             for (int j = 0; j < matriz[0].length; j++){
                 if(!matriz[i][j].contains("1")){
+                    if(i == entradaX && j == entradaY){
+                        idNoInicial = celula;
+                    }
+                    else if(i == saidaX && j == saidaY){
+                        idNoFinal = celula;
+                    }
                     coordenadas[celula][0] = i;
                     coordenadas[celula][1] = j;
                     matrizDeIDs[i][j] = celula;
@@ -87,4 +103,11 @@ public class Celulas {
         }
     }
 
+    public int getIdNoInicial() {
+        return idNoInicial;
+    }
+
+    public int getIdNoFinal() {
+        return idNoFinal;
+    }
 }

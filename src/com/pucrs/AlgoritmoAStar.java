@@ -31,8 +31,8 @@ public class AlgoritmoAStar {
         arqControl = new Celulas();
     }
     
-    public void carregaDados(String[][] matriz, int idNoInicial, int idNoFinal){
-        arqControl.converteMatrizParaGrafo(matriz);
+    public void carregaDados(String[][] matriz, Coordenada entrada, Coordenada saida){
+        arqControl.converteMatrizParaGrafo(matriz, entrada, saida);
         quantidadeNodos = arqControl.getQuantidade();
         matrizDistancias = arqControl.getDistancias();
         matrizCoordenadas = arqControl.getCoordenadas();
@@ -41,9 +41,9 @@ public class AlgoritmoAStar {
         
         for(int i = 0; i< quantidadeNodos; i++) desconhecidos.add(new Nodo(i));
         
-        nodoInicial = containsNo(desconhecidos, idNoInicial);
-        nodoFinal = containsNo(desconhecidos, idNoFinal);
-        desconhecidos.remove(idNoInicial);
+        nodoInicial = containsNo(desconhecidos, arqControl.getIdNoInicial());
+        nodoFinal = containsNo(desconhecidos, arqControl.getIdNoFinal());
+        desconhecidos.remove(arqControl.getIdNoInicial());
         nodoAtual = nodoInicial;
     }
 
