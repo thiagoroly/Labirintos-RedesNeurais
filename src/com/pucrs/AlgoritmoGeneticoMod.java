@@ -89,12 +89,12 @@ public class AlgoritmoGeneticoMod {
     private void funcaoDeAptidao(double[] linha) {
         int totalPontos = 0;
         //System.out.println("Entrada: " + entrada.getX() + "," + entrada.getY());
-        Coordenada agente = new Coordenada(entrada.getX(), entrada.getY());
+        Coordenada coordAgente = new Coordenada(entrada.getX(), entrada.getY());
         visitados = new ArrayList<>();
         visitados.add(new Coordenada(entrada.getX(), entrada.getY()));
 
         MultiLayerPerceptron mlp = new MultiLayerPerceptron(linha);
-        int coord;
+        int coordToMove;
         int B;
         int C;
         int D;
@@ -104,13 +104,13 @@ public class AlgoritmoGeneticoMod {
         //enquanto não morrer ou encontrar a saída
         while(true){
             //pega o conteúdo das celulas vizinhas
-            B = observaCelulaVizinha(agente.getX(), agente.getY(), 1, 0);
-            C = observaCelulaVizinha(agente.getX(), agente.getY(), -1, 0);
-            D = observaCelulaVizinha(agente.getX(), agente.getY(), 0, 1);
-            E = observaCelulaVizinha(agente.getX(), agente.getY(), 0, -1);
+            B = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), 1, 0);
+            C = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), -1, 0);
+            D = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), 0, 1);
+            E = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), 0, -1);
 
-            coord = mlp.generalizacao(B, C, D, E);
-            moveScore = computaPontuacao(agente, converteCoordenada(coord));
+            coordToMove = mlp.generalizacao(B, C, D, E);
+            moveScore = computaPontuacao(coordAgente, converteCoordenada(coordToMove));
             if((moveScore < -1) || (moveScore > 49)){
                 break;
             }
@@ -122,51 +122,52 @@ public class AlgoritmoGeneticoMod {
     }
 
     private int observaCelulaVizinha(int atualX, int atualY, int X, int Y){
-        //pega coord atual do agente e testa B C D e F, um por vez se é válido(in bounds)
-
-        //caso válido pega o conteúdo em string e converte para int
-        // 0/E=0 1=1 M=2 S=3
-
-        return 0;
+        //pega coord atual do agente e testa se é válido(in bounds)
+        if (dentroDoLimite(atualX + X,atualY + Y)){
+            //caso válido pega o conteúdo em string e converte para int
+            String content = labirintoMatriz[atualX + X][atualY + Y];
+            // 0/E=0 1=1 M=2 S=3
+            if(content.equals("1")){
+                return 1;
+            }
+            if(content.contains("0") || content.contains("E")){
+                return 0;
+            }
+            if(content.contains("M")){
+                return 2;
+            }
+            if(content.contains("S")){
+                return 3;
+            }
+        }
+        return 1;
     }
 
-    private int computaPontuacao(Coordenada agente, Coordenada nextMove){
+    private int computaPontuacao(Coordenada agente, Coordenada goTo){
         // 0/E = +5
         // repetido = -1
         // 1 = -30
         // M = +20
         // S = +50
-
-        // fazer o crossover
-
-        if (dentroDoLimite(agente.getX() + nextMove.getX(),agente.getY() + nextMove.getY())){
-
-            //int test1 = agente.getX() + X;
-            //int test2 = agente.getY() + Y;
-
-            //System.out.println("x: " + test1 + ", y: " + test2);
-
-            if(!labirintoMatriz[agente.getX() + nextMove.getX()][agente.getY() + nextMove.getY()].contains("1")){
-                agente.setX(agente.getX()+ nextMove.getX());
-                agente.setY(agente.getY()+ nextMove.getY());
-
-                //System.out.println(agente.getX() + "," + agente.getY());
-                //System.out.println();
-
-                if(jaVisitouCoordenada(agente.getX(), agente.getY())){
-                    return -11;
+        int nextMove = observaCelulaVizinha(agente.getX(), agente.getY(), goTo.getX(), goTo.getY());
+        if (nextMove != 1){
+            agente.setX(agente.getX()+ goTo.getX());
+            agente.setY(agente.getY()+ goTo.getY());
+            if(!jaVisitouCoordenada(agente.getX(), agente.getY())){
+                visitados.add(new Coordenada(agente.getX(), agente.getY()));
+                if(nextMove == 3){
+                    return 50;
                 }
-                else {
-                    if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                        visitados.add(new Coordenada(agente.getX(), agente.getY()));
-                        return 300;
-                    }
-                    visitados.add(new Coordenada(agente.getX(), agente.getY()));
-                    return 10;
+                if(nextMove == 2){
+                    return 20;
                 }
+                return 5;
+            }
+            else {
+                return -1;
             }
         }
-        return -0;
+        return -30;
     }
 
     private Coordenada converteCoordenada(int coord){
@@ -207,7 +208,6 @@ public class AlgoritmoGeneticoMod {
                 }
             }
         }
-
         return false;
     }
 
@@ -267,17 +267,10 @@ public class AlgoritmoGeneticoMod {
 
     private void mutacao(double[][] intermediaria){
         Random r = new Random();
-
-        for(int cont = 1; cont<=2; cont++){
-            int linha = r.nextInt(numCromossomos);
-            int coluna = r.nextInt(numGenes);
-            if(intermediaria[linha][coluna]==0)
-                intermediaria[linha][coluna] = 1;
-            else intermediaria[linha][coluna] = 0;
-
-            //System.out.println("Cromossomo: " + linha + " sofreu mutacao");
-        }
-
+        int linha = r.nextInt(numCromossomos);
+        int coluna = r.nextInt(numGenes);
+        intermediaria[linha][coluna] = r.nextDouble();
+        //System.out.println("Cromossomo: " + linha + " sofreu mutacao");
     }
 
     private void mostraGeracao(double[][] populacao) {
