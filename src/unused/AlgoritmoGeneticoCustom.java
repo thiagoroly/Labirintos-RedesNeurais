@@ -1,4 +1,6 @@
-package com.pucrs;
+package unused;
+
+import com.pucrs.Coordenada;
 
 import java.util.Random;
 import java.util.ArrayList;

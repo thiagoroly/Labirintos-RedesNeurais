@@ -1,4 +1,6 @@
-package com.pucrs;
+package unused;
+
+import com.pucrs.Coordenada;
 
 public class Celulas {
     private int quantidade;

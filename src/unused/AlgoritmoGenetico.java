@@ -1,4 +1,4 @@
-package com.pucrs;
+package unused;
 
 import java.util.Random;
 public class AlgoritmoGenetico {
