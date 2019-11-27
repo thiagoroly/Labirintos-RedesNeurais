@@ -34,18 +34,22 @@ public class MultiLayerPerceptron
         neuronios.add(nD);
         neuronios.add(nE);
 
-        int count = 0;
-        while (weightValues.length > count){
-            NeuronioMod neuronio = new NeuronioMod(weightValues[count], weightValues[count+1], weightValues[count+2], weightValues[count+3], weightValues[count+4]);
-            neuronios.add(neuronio);
-            count += 5;
+        int i = 0;
+        while (i*5 < weightValues.length -6){
+            NeuronioMod neuronio = neuronios.get(i);
+            neuronio.setW0(weightValues[i]);
+            neuronio.setW1(weightValues[i+1]);
+            neuronio.setW2(weightValues[i+2]);
+            neuronio.setW3(weightValues[i+3]);
+            neuronio.setW4(weightValues[i+4]);
+            i++;
         }
     }
     
     public int generalizacao(int x1, int x2, int x3, int x4){  //uso da rede
         //Generalizacao - Teste da rede
 
-        System.out.println("\n--- GENERALIZACAO");
+        //System.out.println("\n--- GENERALIZACAO");
         //propagação
 
         double y1 = n1.calculaV(x1, x2, x3, x4);
@@ -78,7 +82,7 @@ public class MultiLayerPerceptron
             coord = 4;
         }
 
-        System.out.println("Saida Gerada pela rede: " + maxValue + " a coordenada é " + coord);
+        //System.out.println("Saida Gerada pela rede: " + maxValue);
         return coord;
     }
 }

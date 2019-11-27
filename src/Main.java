@@ -14,7 +14,7 @@ public class Main {
         //AlgoritmoGeneticoCustom aG = new AlgoritmoGeneticoCustom(labirinto.getMatriz(), Integer.valueOf(args[1]), Integer.valueOf(args[2]), Integer.valueOf(args[3]), labirinto.getEntrada());
 
         //versão sem args e uso de constantes
-        Labirinto labirinto = new Labirinto(Arquivo.learquivo("./src/labirinto1_10.txt"));
+        Labirinto labirinto = new Labirinto(Arquivo.learquivo("./src/labirinto0_10.txt"));
         AlgoritmoGeneticoMod aG = new AlgoritmoGeneticoMod(labirinto.getMatriz(), NUMGENES, NUMCROMOSSOMOS, MAXGERACOES, labirinto.getEntrada());
 
         ArrayList<Coordenada> saida = aG.encontraSaida();

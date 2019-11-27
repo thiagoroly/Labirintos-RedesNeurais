@@ -1,5 +1,6 @@
 package com.pucrs;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,20 +36,16 @@ public class AlgoritmoGeneticoMod {
     }
 
     public ArrayList<Coordenada> encontraSaida(){
-        for(int geracao = 1; geracao <= maxGeracoes; geracao++) {
+        for(int geracao = 1; geracao < maxGeracoes+1; geracao++) {
             System.out.println("Geraçao:" + geracao);
 
             calculaFuncoesDeAptidao(populacao);
-            double melhor = selecionaElitismo(populacao, populacaoIntermediaria); //highlander, Vulgo elitismo
+            selecionaElitismo(populacao, populacaoIntermediaria); //highlander, Vulgo elitismo
 
             if(populacaoIntermediaria[0][numGenes] > 200) {
                 mostraGeracao(populacao);
                 System.out.println(">>>> Achou a saída: ");
-
-                //saida.setX(visitados.get(visitados.size()-1).getX());
-                //saida.setY(visitados.get(visitados.size()-1).getY());
-                //
-                return solucaoOtima();
+                return bestSteps();
             }
 
             crossOver(populacaoIntermediaria, populacao);
@@ -57,9 +54,10 @@ public class AlgoritmoGeneticoMod {
             }
             populacao = populacaoIntermediaria;
         }
-        ArrayList<Coordenada> saida = new ArrayList();
-        saida.add(new Coordenada(0,0));
-        return saida;
+
+        mostraGeracao(populacao);
+        System.out.println(">>>> Esgotou as gerações: ");
+        return bestSteps();
     }
 
     /**
@@ -111,11 +109,11 @@ public class AlgoritmoGeneticoMod {
 
             coordToMove = mlp.generalizacao(B, C, D, E);
             moveScore = computaPontuacao(coordAgente, converteCoordenada(coordToMove));
-            if((moveScore < -1) || (moveScore > 49)){
-                break;
-            }
             //soma os pontos
             totalPontos += moveScore;
+            if((moveScore < 0) || (moveScore > 49)){
+                break;
+            }
         }
         System.out.println("total pontos: " + totalPontos);
         linha[linha.length-1] = totalPontos; //guarda a aptidão na ultima posição do vetor
@@ -128,10 +126,10 @@ public class AlgoritmoGeneticoMod {
             String content = labirintoMatriz[atualX + X][atualY + Y];
             // 0/E=0 1=1 M=2 S=3
             if(content.equals("1")){
-                return 1;
+                return 0;
             }
             if(content.contains("0") || content.contains("E")){
-                return 0;
+                return 1;
             }
             if(content.contains("M")){
                 return 2;
@@ -140,7 +138,7 @@ public class AlgoritmoGeneticoMod {
                 return 3;
             }
         }
-        return 1;
+        return 0;
     }
 
     private int computaPontuacao(Coordenada agente, Coordenada goTo){
@@ -150,7 +148,7 @@ public class AlgoritmoGeneticoMod {
         // M = +20
         // S = +50
         int nextMove = observaCelulaVizinha(agente.getX(), agente.getY(), goTo.getX(), goTo.getY());
-        if (nextMove != 1){
+        if (nextMove != 0){
             agente.setX(agente.getX()+ goTo.getX());
             agente.setY(agente.getY()+ goTo.getY());
             if(!jaVisitouCoordenada(agente.getX(), agente.getY())){
@@ -232,21 +230,16 @@ public class AlgoritmoGeneticoMod {
     private void crossOver(double[][] intermediaria, double[][] populacao) {
         double[] pai;
         double[] pai2;
-        int corte = 10;
 
-        for(int i=1; i<numCromossomos; i=i+2){
+        for(int i=1; i<numCromossomos; i++){
             do{
                 pai = torneio(populacao);
                 pai2 = torneio(populacao);
             }while(pai==pai2);
             //System.out.println("Gerando dois filhos...");
-            for(int j=0;j<corte; j++){
-                intermediaria[i][j]=pai[j];
-                intermediaria[i+1][j]=pai2[j];
-            }
-            for(int j=corte;j<numGenes; j++){
-                intermediaria[i][j]=pai2[j];
-                intermediaria[i+1][j]=pai[j];
+
+            for(int j=0;j<numGenes; j++) {
+                intermediaria[i][j] = (pai[j] + pai2[j])/2;
             }
         }
     }
@@ -288,70 +281,32 @@ public class AlgoritmoGeneticoMod {
     /**
      * Decodifica melhor soluçao
      */
-    private ArrayList<Coordenada> solucaoOtima(){
+    private ArrayList<Coordenada> bestSteps(){
         ArrayList<Coordenada> caminho = new ArrayList<>();
-        Coordenada agente = new Coordenada(entrada.getX(), entrada.getY());
-//        for(int i = 0; i<populacaoIntermediaria[0].length-1; i++) {
-//            switch (populacaoIntermediaria[0][i]){
-//                case 0:
-//                    if(localizaSaida(agente, -1, -1, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 1:
-//                    if(localizaSaida(agente, -1, 0, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 2:
-//                    if(localizaSaida(agente, -1, 1, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 3:
-//                    if(localizaSaida(agente, 0, -1, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 4:
-//                    if(localizaSaida(agente, 0, 1, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 5:
-//                    if(localizaSaida(agente, 1, -1, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 6:
-//                    if(localizaSaida(agente, 1, 0, caminho)){
-//                    return caminho;
-//                }
-//                    break;
-//                case 7:
-//                    if(localizaSaida(agente, 1, 1, caminho)){
-//                        return caminho;
-//                    }
-//                    break;
-//            }
-//        }
-        return caminho;
-    }
+        MultiLayerPerceptron mlp = new MultiLayerPerceptron(populacao[0]);
+        Coordenada coordAgente = new Coordenada(entrada.getX(), entrada.getY());
+        Coordenada coordToMove;
+        int B;
+        int C;
+        int D;
+        int E;
+        int moveScore;
 
-    private boolean localizaSaida(Coordenada agente, int X, int Y, ArrayList<Coordenada> caminho){
-        if (dentroDoLimite(agente.getX()+ X,agente.getY() + Y)){
-            if(!labirintoMatriz[agente.getX() + X][agente.getY() + Y].contains("1")){
-                agente.setX(agente.getX()+ X);
-                agente.setY(agente.getY()+ Y);
+        //enquanto não morrer ou encontrar a saída
+        while(true){
+            //pega o conteúdo das celulas vizinhas
+            B = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), 1, 0);
+            C = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), -1, 0);
+            D = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), 0, 1);
+            E = observaCelulaVizinha(coordAgente.getX(), coordAgente.getY(), 0, -1);
 
-                if(labirintoMatriz[agente.getX()][agente.getY()].contains("S")){
-                    visitados.add(agente);
-                    caminho.add(new Coordenada(agente.getX(), agente.getY()));
-                    return true;
-                }
-                caminho.add(new Coordenada(agente.getX(), agente.getY()));
+            coordToMove = converteCoordenada(mlp.generalizacao(B, C, D, E));
+            caminho.add(coordToMove);
+            moveScore = computaPontuacao(coordAgente, coordToMove);
+            if((moveScore < -1) || (computaPontuacao(coordAgente, coordToMove) > 49)){
+                break;
             }
         }
-        return false;
+        return caminho;
     }
 }
