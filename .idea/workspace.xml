@@ -7,23 +7,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03467a21-5032-4743-ba9a-7babf0599cd1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/T1_2019_02.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoGenetico.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoGeneticoCustom.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoGeneticoMod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AlgoritmoGeneticoMod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/AppPerceptron.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Arquivo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Arquivo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Celulas.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Coordenada.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Coordenada.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Labirinto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Labirinto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/MultiLayerPerceptron.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/MultiLayerPerceptron.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Neuronio.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/NeuronioMod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/NeuronioMod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/com/pucrs/Perceptron.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/unused/Celulas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/unused/Neuronio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/T1 IA/unused/Perceptron.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/pucrs/Coordenada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pucrs/Coordenada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/pucrs/MultiLayerPerceptron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pucrs/MultiLayerPerceptron.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unused/AlgoritmoGenetico.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unused/AlgoritmoGeneticoCustom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unused/Celulas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unused/Neuronio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unused/Perceptron.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,15 +39,57 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1799258694">
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="772" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="772" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="MF" value="1" />
+          <entry key="java" value="16" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="16" />
+          <entry key="Manifest" value="1" />
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoMod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="115" column="13" selection-start-line="115" selection-start-column="13" selection-end-line="115" selection-end-column="13" />
+            <state relative-caret-position="366">
+              <caret line="321" column="40" selection-start-line="321" selection-start-column="24" selection-end-line="321" selection-end-column="40" />
               <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#AlgoritmoGeneticoMod#0;class#AlgoritmoGeneticoMod#0" />
+                <element signature="method#encontraSaida#0;class#AlgoritmoGeneticoMod#0" />
                 <element signature="method#inicializaPopulacao#0;class#AlgoritmoGeneticoMod#0" />
+                <element signature="method#calculaFuncoesDeAptidao#0;class#AlgoritmoGeneticoMod#0" />
+                <element signature="method#computaPontuacao#0;class#AlgoritmoGeneticoMod#0" />
+                <element signature="method#converteCoordenada#0;class#AlgoritmoGeneticoMod#0" />
+                <element signature="method#dentroDoLimite#0;class#AlgoritmoGeneticoMod#0" />
                 <element signature="method#jaVisitouCoordenada#0;class#AlgoritmoGeneticoMod#0" />
                 <element signature="method#selecionaElitismo#0;class#AlgoritmoGeneticoMod#0" />
                 <element signature="method#crossOver#0;class#AlgoritmoGeneticoMod#0" />
@@ -55,53 +102,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/pucrs/Coordenada.java">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="391">
+              <caret line="23" column="36" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="36" />
               <folding>
-                <element signature="e#192#193#0" expanded="true" />
-                <element signature="e#216#217#0" expanded="true" />
-                <element signature="e#265#266#0" expanded="true" />
-                <element signature="e#296#297#0" expanded="true" />
-                <element signature="e#322#323#0" expanded="true" />
-                <element signature="e#353#354#0" expanded="true" />
-                <element signature="e#379#380#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/pucrs/MultiLayerPerceptron.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="84" column="10" selection-start-line="84" selection-start-column="10" selection-end-line="84" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/pucrs/NeuronioMod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-              <folding>
-                <element signature="e#651#652#0" expanded="true" />
-                <element signature="e#708#709#0" expanded="true" />
-                <element signature="method#calculaY#0;class#NeuronioMod#0" />
-                <element signature="e#1256#1257#0" expanded="true" />
-                <element signature="e#1284#1285#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/labirinto0_10.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -121,7 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/pucrs/Labirinto.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoCustom.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/AlgoritmoAStar.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/Celulas.java" />
@@ -129,12 +135,16 @@
         <option value="$PROJECT_DIR$/src/com/pucrs/AppPerceptron.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/Perceptron.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/Neuronio.java" />
-        <option value="$PROJECT_DIR$/src/unused/Celulas.java" />
         <option value="$PROJECT_DIR$/src/unused/Neuronio.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/NeuronioMod.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/unused/Coordenada.java" />
+        <option value="$PROJECT_DIR$/src/com/pucrs/Coordenada.java" />
+        <option value="$PROJECT_DIR$/src/com/pucrs/Labirinto.java" />
+        <option value="$PROJECT_DIR$/src/unused/AlgoritmoGeneticoCustom.java" />
+        <option value="$PROJECT_DIR$/src/unused/Celulas.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/MultiLayerPerceptron.java" />
         <option value="$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoMod.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -179,12 +189,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574780614661" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574978107948" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -247,10 +257,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="816" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1671141" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18608414" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -258,9 +268,9 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24929178" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.33144477" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32796487" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4465593" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.33089313" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -297,32 +307,11 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoMod.java</url>
-          <line>109</line>
-          <properties />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="linha[i]" language="JAVA" />
@@ -341,13 +330,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pucrs/AlgoritmoAStar.java" />
     <entry file="file://$PROJECT_DIR$/src/com/pucrs/AppPerceptron.java" />
-    <entry file="file://$PROJECT_DIR$/src/unused/Celulas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/unused/Perceptron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -362,10 +344,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pucrs/Labirinto.java">
+    <entry file="file://$PROJECT_DIR$/src/unused/Neuronio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="63" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
+        <state relative-caret-position="-45">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unused/Coordenada.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#192#193#0" expanded="true" />
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#265#266#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#322#323#0" expanded="true" />
+            <element signature="e#353#354#0" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -376,17 +375,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/unused/Neuronio.java">
+    <entry file="file://$PROJECT_DIR$/src/com/pucrs/NeuronioMod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="165">
+          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+          <folding>
+            <element signature="e#651#652#0" expanded="true" />
+            <element signature="e#708#709#0" expanded="true" />
+            <element signature="method#calculaY#0;class#NeuronioMod#0" />
+            <element signature="e#1256#1257#0" expanded="true" />
+            <element signature="e#1284#1285#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/unused/AlgoritmoGeneticoCustom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="106" column="23" lean-forward="true" selection-start-line="103" selection-start-column="16" selection-end-line="106" selection-end-column="23" />
+        <state relative-caret-position="136">
+          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#selecionaElitismo#0;class#AlgoritmoGeneticoCustom#0" />
@@ -401,51 +407,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/unused/Celulas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="54" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pucrs/Labirinto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/labirinto0_10.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pucrs/NeuronioMod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding>
-            <element signature="e#651#652#0" expanded="true" />
-            <element signature="e#708#709#0" expanded="true" />
-            <element signature="method#calculaY#0;class#NeuronioMod#0" />
-            <element signature="e#1256#1257#0" expanded="true" />
-            <element signature="e#1284#1285#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pucrs/MultiLayerPerceptron.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="84" column="10" selection-start-line="84" selection-start-column="10" selection-end-line="84" selection-end-column="10" />
+        <state relative-caret-position="408">
+          <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
+          <folding>
+            <element signature="method#MultiLayerPerceptron#0;class#MultiLayerPerceptron#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pucrs/Coordenada.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="153">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
           <folding>
             <element signature="e#192#193#0" expanded="true" />
             <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
             <element signature="e#265#266#0" expanded="true" />
             <element signature="e#296#297#0" expanded="true" />
             <element signature="e#322#323#0" expanded="true" />
@@ -455,12 +458,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pucrs/AlgoritmoGeneticoMod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="115" column="13" selection-start-line="115" selection-start-column="13" selection-end-line="115" selection-end-column="13" />
+        <state relative-caret-position="366">
+          <caret line="321" column="40" selection-start-line="321" selection-start-column="24" selection-end-line="321" selection-end-column="40" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#AlgoritmoGeneticoMod#0;class#AlgoritmoGeneticoMod#0" />
+            <element signature="method#encontraSaida#0;class#AlgoritmoGeneticoMod#0" />
             <element signature="method#inicializaPopulacao#0;class#AlgoritmoGeneticoMod#0" />
+            <element signature="method#calculaFuncoesDeAptidao#0;class#AlgoritmoGeneticoMod#0" />
+            <element signature="method#computaPontuacao#0;class#AlgoritmoGeneticoMod#0" />
+            <element signature="method#converteCoordenada#0;class#AlgoritmoGeneticoMod#0" />
+            <element signature="method#dentroDoLimite#0;class#AlgoritmoGeneticoMod#0" />
             <element signature="method#jaVisitouCoordenada#0;class#AlgoritmoGeneticoMod#0" />
             <element signature="method#selecionaElitismo#0;class#AlgoritmoGeneticoMod#0" />
             <element signature="method#crossOver#0;class#AlgoritmoGeneticoMod#0" />
@@ -490,6 +510,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -512,6 +533,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -523,6 +545,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
+          <last-edited>T1 IA</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -1,6 +1,5 @@
 package com.pucrs;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -37,26 +36,31 @@ public class AlgoritmoGeneticoMod {
 
     public ArrayList<Coordenada> encontraSaida(){
         for(int geracao = 1; geracao < maxGeracoes+1; geracao++) {
-            System.out.println("Geraçao:" + geracao);
+            System.out.println("Geraçao:" + geracao + " -------------------------------------------------------------");
 
             calculaFuncoesDeAptidao(populacao);
             selecionaElitismo(populacao, populacaoIntermediaria); //highlander, Vulgo elitismo
 
-            if(populacaoIntermediaria[0][numGenes] > 200) {
+            if(populacaoIntermediaria[0][numGenes] > 180) {
                 mostraGeracao(populacao);
                 System.out.println(">>>> Achou a saída: ");
                 return bestSteps();
             }
 
             crossOver(populacaoIntermediaria, populacao);
-            if(geracao%2==0) {
+            //if(geracao%2==0) {
                 mutacao(populacaoIntermediaria);
-            }
+            mutacao(populacaoIntermediaria);
+            mutacao(populacaoIntermediaria);
+            //}
             populacao = populacaoIntermediaria;
+            //mostraGeracao(populacao);
         }
 
-        mostraGeracao(populacao);
+
         System.out.println(">>>> Esgotou as gerações: ");
+
+        mostraGeracao(populacao);
         return bestSteps();
     }
 
@@ -77,7 +81,9 @@ public class AlgoritmoGeneticoMod {
      */
     private void calculaFuncoesDeAptidao(double[][] populacao){
         for(int i = 0; i < populacao.length; i++) {
+            System.out.println("Cromossomo: " + i + " ||||||||||||");
             funcaoDeAptidao(populacao[i]);
+            //System.out.println("Fim do Cromossomo: " + i);
         }
     }
 
@@ -85,7 +91,6 @@ public class AlgoritmoGeneticoMod {
      * Funçao de aptidao: heuristica que estima a qualidade de uma soluçao
      */
     private void funcaoDeAptidao(double[] linha) {
-        int totalPontos = 0;
         //System.out.println("Entrada: " + entrada.getX() + "," + entrada.getY());
         Coordenada coordAgente = new Coordenada(entrada.getX(), entrada.getY());
         visitados = new ArrayList<>();
@@ -93,10 +98,11 @@ public class AlgoritmoGeneticoMod {
 
         MultiLayerPerceptron mlp = new MultiLayerPerceptron(linha);
         int coordToMove;
-        int B;
-        int C;
-        int D;
-        int E;
+        double B;
+        double C;
+        double D;
+        double E;
+        int totalPontos = 0;
         int moveScore;
 
         //enquanto não morrer ou encontrar a saída
@@ -111,7 +117,8 @@ public class AlgoritmoGeneticoMod {
             moveScore = computaPontuacao(coordAgente, converteCoordenada(coordToMove));
             //soma os pontos
             totalPontos += moveScore;
-            if((moveScore < 0) || (moveScore > 49)){
+            //System.out.println("total pontos: " + totalPontos);
+            if((moveScore < 0) || (moveScore > 49) || (totalPontos < 0)){
                 break;
             }
         }
@@ -119,23 +126,23 @@ public class AlgoritmoGeneticoMod {
         linha[linha.length-1] = totalPontos; //guarda a aptidão na ultima posição do vetor
     }
 
-    private int observaCelulaVizinha(int atualX, int atualY, int X, int Y){
+    private double observaCelulaVizinha(int atualX, int atualY, int X, int Y){
         //pega coord atual do agente e testa se é válido(in bounds)
         if (dentroDoLimite(atualX + X,atualY + Y)){
             //caso válido pega o conteúdo em string e converte para int
             String content = labirintoMatriz[atualX + X][atualY + Y];
             // 0/E=0 1=1 M=2 S=3
             if(content.equals("1")){
-                return 0;
+                return -1;
             }
             if(content.contains("0") || content.contains("E")){
-                return 1;
+                return -0.333;
             }
             if(content.contains("M")){
-                return 2;
+                return 0.333;
             }
             if(content.contains("S")){
-                return 3;
+                return 1;
             }
         }
         return 0;
@@ -147,24 +154,29 @@ public class AlgoritmoGeneticoMod {
         // 1 = -30
         // M = +20
         // S = +50
-        int nextMove = observaCelulaVizinha(agente.getX(), agente.getY(), goTo.getX(), goTo.getY());
+        double nextMove = observaCelulaVizinha(agente.getX(), agente.getY(), goTo.getX(), goTo.getY());
         if (nextMove != 0){
             agente.setX(agente.getX()+ goTo.getX());
             agente.setY(agente.getY()+ goTo.getY());
             if(!jaVisitouCoordenada(agente.getX(), agente.getY())){
                 visitados.add(new Coordenada(agente.getX(), agente.getY()));
                 if(nextMove == 3){
+                    //System.out.println("Achou a saída +50 pontos");
                     return 50;
                 }
                 if(nextMove == 2){
+                    //System.out.println("Catou saco de moedas +20 pontos");
                     return 20;
                 }
+                //System.out.println("Visitou nova celula +5 pontos");
                 return 5;
             }
             else {
+                //System.out.println("Visitou celula já visitada -1 ponto");
                 return -1;
             }
         }
+        //System.out.println("bateu na parede e morreu -30 pontos");
         return -30;
     }
 
@@ -236,6 +248,7 @@ public class AlgoritmoGeneticoMod {
                 pai = torneio(populacao);
                 pai2 = torneio(populacao);
             }while(pai==pai2);
+
             //System.out.println("Gerando dois filhos...");
 
             for(int j=0;j<numGenes; j++) {
@@ -260,10 +273,13 @@ public class AlgoritmoGeneticoMod {
 
     private void mutacao(double[][] intermediaria){
         Random r = new Random();
-        int linha = r.nextInt(numCromossomos);
+        int linha = r.nextInt(numCromossomos-1)+1;
         int coluna = r.nextInt(numGenes);
-        intermediaria[linha][coluna] = r.nextDouble();
-        //System.out.println("Cromossomo: " + linha + " sofreu mutacao");
+        double valor = r.nextDouble();
+        System.out.println("Cromossomo: " + linha + ", Gene: " + coluna + " ++++++++++++++++++++++++++++");
+        System.out.println("mutou de: " + intermediaria[linha][coluna]);
+        System.out.println("para:     " + valor);
+        intermediaria[linha][coluna] = valor;
     }
 
     private void mostraGeracao(double[][] populacao) {
@@ -286,10 +302,11 @@ public class AlgoritmoGeneticoMod {
         MultiLayerPerceptron mlp = new MultiLayerPerceptron(populacao[0]);
         Coordenada coordAgente = new Coordenada(entrada.getX(), entrada.getY());
         Coordenada coordToMove;
-        int B;
-        int C;
-        int D;
-        int E;
+        int totalPontos = 0;
+        double B;
+        double C;
+        double D;
+        double E;
         int moveScore;
 
         //enquanto não morrer ou encontrar a saída
@@ -303,7 +320,8 @@ public class AlgoritmoGeneticoMod {
             coordToMove = converteCoordenada(mlp.generalizacao(B, C, D, E));
             caminho.add(coordToMove);
             moveScore = computaPontuacao(coordAgente, coordToMove);
-            if((moveScore < -1) || (computaPontuacao(coordAgente, coordToMove) > 49)){
+            totalPontos += moveScore;
+            if((moveScore < 0) || (moveScore > 49) || (totalPontos < 0)){
                 break;
             }
         }

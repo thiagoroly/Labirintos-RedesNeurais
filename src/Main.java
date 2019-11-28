@@ -6,7 +6,7 @@ public class Main {
 
     public final static int NUMGENES = 41; //total de cargas
     public final static int NUMCROMOSSOMOS = 11;   //tamanho da populaçao: quantidade de soluçoes
-    public final static int MAXGERACOES = 50;  //numero maximo de geraçoes (iteraçoes)
+    public final static int MAXGERACOES = 1000;  //numero maximo de geraçoes (iteraçoes)
 
     public static void main(String[] args) {
         //Versão com args

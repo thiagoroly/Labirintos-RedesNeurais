@@ -46,7 +46,7 @@ public class MultiLayerPerceptron
         }
     }
     
-    public int generalizacao(int x1, int x2, int x3, int x4){  //uso da rede
+    public int generalizacao(double x1, double x2, double x3, double x4){  //uso da rede
         //Generalizacao - Teste da rede
 
         //System.out.println("\n--- GENERALIZACAO");
@@ -67,22 +67,27 @@ public class MultiLayerPerceptron
         double maxValue = yB;
         int coord = 1;
 
+        String coordebug = "baixo";
+
         if (yC > maxValue) {
             maxValue = yC;
             coord = 2;
+            coordebug = "cima";
         }
 
         if(yD > maxValue) {
             maxValue = yD;
             coord = 3;
+            coordebug = "direita";
         }
 
         if(yE > maxValue) {
             maxValue = yE;
             coord = 4;
+            coordebug = "esquerda";
         }
 
-        //System.out.println("Saida Gerada pela rede: " + maxValue);
+        //System.out.println("((" + coordebug + ")) | Saída: "+ maxValue);
         return coord;
     }
 }
